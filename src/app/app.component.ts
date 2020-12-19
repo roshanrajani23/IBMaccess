@@ -31,6 +31,10 @@ export class AppComponent {
     this.getUsers();
   }
 
+  flagChangedHandler(flag: boolean) {
+    this.flag = flag;
+  }
+
   getUsers(){
     this.githubService.getUsers('r').subscribe((data)=>{
       
@@ -44,15 +48,15 @@ export class AppComponent {
       this.githubService.getRepos(val.login).subscribe((data)=>{
         if(data.name != null){
           let name = data.name.split(' ');
-          let Login = data.login;
+          let login = data.login;
           let FirstName = name[0];
           let LastName = name[name.length-1] 
           let numOfRepos = data.public_repos;
           let avatar_url = val.avatar_url;
           let id = data.id;
-          console.log(FirstName+ '-' + LastName+'  -'+numOfRepos+' -'+avatar_url+"id"+id);
+          console.log(FirstName+ '-' + LastName+'  -'+numOfRepos+' -'+avatar_url+"id"+id, login);
           console.log(numOfRepos);
-          this.customRepos.push(new Repos(FirstName, LastName, numOfRepos, avatar_url, Login, id))
+          this.customRepos.push(new Repos(FirstName, LastName, numOfRepos, avatar_url, login, id))
         }
         else
           console.log(data.name)

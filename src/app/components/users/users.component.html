@@ -9,7 +9,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr class="clickable" *ngFor="let repo of customRepos | paginate:{itemsPerPage:10, currentPage:p};" (click)="navigateDetails(repo.id)">
+        <tr class="clickable" *ngFor="let repo of customRepos | paginate:{itemsPerPage:10, currentPage:p};" (click)="navigateDetails(repo.login)">
             <td><img height="50" width="50" class="rounded" src={{repo.avatar_url}} alt="" /></td>
             <td>{{repo.Login}}</td>
             <td>{{repo.FirstName}}</td>

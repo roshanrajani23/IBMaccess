@@ -6,8 +6,8 @@ import { UsersComponent } from './components/users/users.component';
 
 
 const routes: Routes = [
-  { path: '', component: UsersComponent },
-  { path: 'details/:id', component: DetailsTabComponent }
+  { path: 'details/:login', pathMatch: 'full', component: DetailsTabComponent },
+  { path: 'home', component: AppComponent  }
 ];
 
 @NgModule({
@@ -15,4 +15,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents = [UsersComponent, DetailsTabComponent]

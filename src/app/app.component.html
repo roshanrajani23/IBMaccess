@@ -10,14 +10,14 @@
   <h1>Github Users</h1>
   <nav>
     <a routerLink="/" routerLinkActive="active">Home</a>
-    <a routerLink="/details/:id" routerLinkActive="active">Details</a>
+    <a routerLink="/details/:login" routerLinkActive="active">Details</a>
   </nav>
   <span class="searchBar">
     <input  type="text" class="form-control" name='searchBar' (blur)='fireUserSearch($event)'  placeholder="Search...">
   </span>
   <span>
   </span>
-  <app-users *ngIf="router != '/ur_route'" [customRepos]="customRepos" [users]="users"></app-users>
+  <app-users (flagChanged)="flagChangedHandler($event)" [flag]="flag" *ngIf="flag" [customRepos]="customRepos" [users]="users"></app-users>
+  <app-details-tab (flagChanged)="flagChangedHandler($event)" [flag]="flag" *ngIf="!flag"></app-details-tab>
 </body>
 </html>
-<router-outlet></router-outlet>
