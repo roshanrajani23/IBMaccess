@@ -12,12 +12,9 @@
     <a routerLink="/" routerLinkActive="active">Home</a>
     <a routerLink="/details/:login" routerLinkActive="active">Details</a>
   </nav>
-  <span class="searchBar">
-    <input  type="text" class="form-control" name='searchBar' (blur)='fireUserSearch($event)'  placeholder="Search...">
-  </span>
   <span>
   </span>
   <app-users (flagChanged)="flagChangedHandler($event)" [flag]="flag" *ngIf="flag" [customRepos]="customRepos" [users]="users"></app-users>
-  <app-details-tab (flagChanged)="flagChangedHandler($event)" [flag]="flag" *ngIf="!flag"></app-details-tab>
+  <app-details-tab (flagChanged)="flagChangedHandler($event)" [flag]="flag" [customRepos]="customRepos" [users]="users" *ngIf="!flag"></app-details-tab>
 </body>
 </html>

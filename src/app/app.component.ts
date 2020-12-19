@@ -49,14 +49,14 @@ export class AppComponent {
         if(data.name != null){
           let name = data.name.split(' ');
           let login = data.login;
-          let FirstName = name[0];
-          let LastName = name[name.length-1] 
+          let firstName = name[0];
+          let lastName = name[name.length-1] 
           let numOfRepos = data.public_repos;
           let avatar_url = val.avatar_url;
           let id = data.id;
-          console.log(FirstName+ '-' + LastName+'  -'+numOfRepos+' -'+avatar_url+"id"+id, login);
+          console.log(firstName+ '-' + lastName+'  -'+numOfRepos+' -'+avatar_url+"id"+id, login);
           console.log(numOfRepos);
-          this.customRepos.push(new Repos(FirstName, LastName, numOfRepos, avatar_url, login, id))
+          this.customRepos.push(new Repos(firstName, lastName, numOfRepos, avatar_url, login, id))
         }
         else
           console.log(data.name)

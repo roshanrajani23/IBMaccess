@@ -1,8 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ɵCompiler_compileModuleSync__POST_R3__} from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from "@angular/router";
 import { GithubService } from '../../services/github.service';
 import { Details } from "../../models/details";
+import { Repos } from 'src/app/models/repos';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-details-tab',
@@ -12,23 +14,16 @@ import { Details } from "../../models/details";
 export class DetailsTabComponent implements OnInit {
 
   @Input() flag:boolean;
+  @Input() customRepos:Repos[];
   @Output() flagChanged: EventEmitter<boolean> =   new EventEmitter();
   login:String;
-  githubDetails:Details;
+  @Output() githubDetails:Repos;
 
   constructor(private _router:Router, private route: ActivatedRoute, private githubService:GithubService) { }
 
   ngOnInit(): void {
     this.login = this.route.firstChild.snapshot.params['login'];
-    console.log(this.login)
     this.getDetails();
-
-
-    //this.id = this.route.snapshot.paramMap.get("id")
-    // this.route.params.subscribe(params => {
-    //   this.id = params["id"];
-    //   console.log(this.id);
-    // });
   }
 
   navigateBack(){
@@ -37,36 +32,12 @@ export class DetailsTabComponent implements OnInit {
     this._router.navigate(['/home'], { replaceUrl: true });
   }
 
-  getDetails(){
-
-      this.githubService.getRepos(this.login).subscribe((data)=>{
-        if(data.name != null){
-
-          console.log(data);
-          let organization = data.organization;
-          let fullName = data.name;
-          let type = data.type;
-          let location = data.location;
-          let avatar_url = data.avatar_url;
-
-          this.githubDetails = new Details(fullName, avatar_url, type, location, organization)
-
-
-          // let name = data.name.split(' ');
-          // let FirstName = name[0];
-          // let LastName = name[name.length-1] 
-          // let numOfRepos = data.public_repos;
-          // let avatar_url = val.avatar_url;
-          // let id = data.id;
-          // console.log(FirstName+ '-' + LastName+'  -'+numOfRepos+' -'+avatar_url+"id"+id);
-          // console.log(numOfRepos);
-
-          // this.customRepos.push(new Repos(FirstName, LastName, numOfRepos, avatar_url,id))
-          // console.log("==========================="+this.customRepos.length)
-        }
-        else
-          console.log(data.name)
-      })
-    }
-
+  getDetails() {
+    _.filter(this.customRepos, (obj) => {
+      if(obj.login === this.login) {
+        console.log(obj);
+        return this.githubDetails = obj;
+      }
+    }); 
+  }
 }

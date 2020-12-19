@@ -1,3 +1,6 @@
+<span class="searchBar">
+    <input  type="text" class="form-control" name='searchBar' (blur)='fireUserSearch($event)'  placeholder="Search ..">
+    </span>
 <table mat-table class="table table-bordered" style="margin:100;">
     <thead class="thead-dark">
         <tr>
@@ -11,11 +14,13 @@
     <tbody>
         <tr class="clickable" *ngFor="let repo of customRepos | paginate:{itemsPerPage:10, currentPage:p};" (click)="navigateDetails(repo.login)">
             <td><img height="50" width="50" class="rounded" src={{repo.avatar_url}} alt="" /></td>
-            <td>{{repo.Login}}</td>
-            <td>{{repo.FirstName}}</td>
-            <td>{{repo.LastName}}</td>
+            <td>{{repo.login}}</td>
+            <td>{{repo.firstName}}</td>
+            <td>{{repo.lastName}}</td>
             <td>{{repo.numOfRepos}}</td>
         </tr>
     </tbody>
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    <div class="paginate-center" >
+        <pagination-controls previousLabel=""  nextLabel="" (pageChange)="p = $event"></pagination-controls>
+    </div>
 </table>
