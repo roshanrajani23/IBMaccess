@@ -7,7 +7,7 @@
   </div>
 <form class="form-inline d-flex justify-content-center md-form form-sm active-cyan-2 mt-2">
     <input class="form-control form-control-sm mr-3 w-75" 
-    (blur)='fireUserSearch($event)' 
+    [(ngModel)]="searchText"
     name="searchBar" 
     type="text"
     placeholder="Search"
@@ -38,6 +38,6 @@
         </tr>
     </tbody>
     <div class="paginate-center" >
-        <pagination-controls previousLabel=""  nextLabel="" (pageChange)="p = $event"></pagination-controls>
+        <pagination-controls previousLabel="" [autoHide]="true" nextLabel="" (pageChange)="p = $event"></pagination-controls>
     </div>
 </table>

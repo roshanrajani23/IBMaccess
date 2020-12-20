@@ -7,10 +7,14 @@ import { EditTabComponent } from './components/edit-tab/edit-tab.component';
 
 
 const routes: Routes = [
-  { path: 'details/:login', pathMatch: 'full', component: DetailsTabComponent },
-  { path: 'edit/:login', pathMatch: 'full', component: EditTabComponent },
-  { path: 'home', component: AppComponent  }
-];
+  { 
+    path: '', component: AppComponent,
+    children: [
+      {path: 'details/:login', component: DetailsTabComponent},
+      {path: 'edit/:login', component: EditTabComponent}
+    ]
+  }
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

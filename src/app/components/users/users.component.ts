@@ -17,6 +17,7 @@ export class UsersComponent implements OnInit {
   @Input() flag:boolean;
   @Output() flagChanged: EventEmitter<boolean> = new EventEmitter();
   p:number = 1;
+  searchText : String;
 
   githubUsers: String[] = [];
   bsModalRef: any = {};
@@ -48,9 +49,19 @@ export class UsersComponent implements OnInit {
           let avatar_url = data.avatar_url;
           let id = data.id;
           let login = data.login;
-          console.log(lastName, firstName, id, numOfRepos);
+          let value = {
+            firstName: name[0],
+            lastName: name[name.length-1],
+            numOfRepos: data.public_repos,
+            avatar_url: data.avatar_url,
+            login: data.login,
+            id: data.id,
+            following: data.following,
+            location: data.location
+          }
+          console.log(lastName, firstName, avatar_url, id, numOfRepos, login);
           //Not working as expected
-          //this.customRepos = new Repos(firstName, lastName, numOfRepos, avatar_url, login, id);
+          this.customRepos = [value];
       } else console.error();
     })
   }
@@ -58,7 +69,7 @@ export class UsersComponent implements OnInit {
   // Search Text data based of username from All gitApi data, for USERNAME and AVATAR
   fireUserSearch(e: any){
     let searchText:string = e.target.value;
-    this.getDetailsForSearch(searchText);
+    this.getDetailsForSearch(this.searchText);
     if(searchText && searchText.length>0){
       if(this.isSearchCleared){
         this.backup_customRepos = JSON.parse(JSON.stringify(this.customRepos));
@@ -77,7 +88,9 @@ export class UsersComponent implements OnInit {
           numOfRepos: "",
           avatar_url: '/assets/images/emoji.png',
           login: "No Data Found",
-          id: ""
+          id: "",
+          following: "",
+          location: ""
         }
         this.customRepos = [noDataFound];
       });

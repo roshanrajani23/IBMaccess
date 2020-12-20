@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ɵCompiler_compileModuleSync__POST_R3__} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ɵCompiler_compileModuleSync__POST_R3__, OnChanges} from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from "@angular/router";
 import { GithubService } from '../../services/github.service';
@@ -51,6 +51,8 @@ export class DetailsTabComponent implements OnInit {
       if(obj.login === this.login) {
         console.log(obj);
         return this.githubDetails = obj;
+      } else {
+        this.githubDetails = this.customRepos[0];
       }
     }); 
   }
