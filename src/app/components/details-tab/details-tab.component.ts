@@ -45,6 +45,7 @@ export class DetailsTabComponent implements OnInit {
     this.editFlag = !this.editFlag;
   }
 
+  //Gets the details to DetailsComponent without making call to repos for other information
   getDetails() {
     _.filter(this.customRepos, (obj) => {
       if(obj.login === this.login) {

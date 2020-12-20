@@ -3,6 +3,7 @@ import { Repos } from 'src/app/models/repos';
 import { Users } from 'src/app/models/users';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GithubService } from 'src/app/services/github.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -11,10 +12,10 @@ import { GithubService } from 'src/app/services/github.service';
 })
 export class UsersComponent implements OnInit {
 
-  @Input() users:Users[]
-  @Input() customRepos:Repos[]
-  @Input() flag:boolean
-  @Output() flagChanged: EventEmitter<boolean> =   new EventEmitter();
+  @Input() users:Users[];
+  @Input() customRepos:Repos[];
+  @Input() flag:boolean;
+  @Output() flagChanged: EventEmitter<boolean> = new EventEmitter();
   p:number = 1;
 
   githubUsers: String[] = [];
@@ -35,17 +36,38 @@ export class UsersComponent implements OnInit {
     this.flagChanged.emit(this.flag);
   }
 
+  // Search Text data based of username from All gitApi data, for REPOS
+  getDetailsForSearch(searchText){
+    this.githubService.getRepos(searchText).subscribe((data)=>{
+      if(data.name != null){
+        console.log(data);
+        let name = data.name.split(' ');
+          let firstName = name[0];
+          let lastName = name[name.length-1] 
+          let numOfRepos = data.public_repos;
+          let avatar_url = data.avatar_url;
+          let id = data.id;
+          let login = data.login;
+          console.log(lastName, firstName, id, numOfRepos);
+          //Not working as expected
+          //this.customRepos = new Repos(firstName, lastName, numOfRepos, avatar_url, login, id);
+      } else console.error();
+    })
+  }
+
+  // Search Text data based of username from All gitApi data, for USERNAME and AVATAR
   fireUserSearch(e: any){
     let searchText:string = e.target.value;
+    this.getDetailsForSearch(searchText);
     if(searchText && searchText.length>0){
       if(this.isSearchCleared){
         this.backup_customRepos = JSON.parse(JSON.stringify(this.customRepos));
       }
       this.githubService.getName(searchText).subscribe(x => {
-      this.customRepos = [x];
-      this.isSearchCleared = false;
+        this.customRepos = [x];
+        this.isSearchCleared = false;
       },
-      err =>{
+      err => {
         this.toastMessage = true;
         console.log(err);
         let noDataFound = 
