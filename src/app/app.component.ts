@@ -58,7 +58,7 @@ export class AppComponent {
           let location = data.location;
           console.log(firstName+ '-' + lastName+'  -'+numOfRepos+' -'+avatar_url+"id"+id, login);
           console.log(data);
-          this.customRepos.push(new Repos(firstName, lastName, numOfRepos, avatar_url, login, id, following, location))
+          this.customRepos.push(new Repos(firstName, lastName, numOfRepos, avatar_url, login, id, following, location));
         }
         else
           console.log(data.name)

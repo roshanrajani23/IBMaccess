@@ -7,10 +7,6 @@
   <base href="/">
 </head>
 <body>
-  <!-- <nav>
-    <a routerLink="/" routerLinkActive="active">Home</a>
-    <a routerLink="/details/:login" routerLinkActive="active">Details</a>
-  </nav> -->
   <span>
   </span>
   <app-users (flagChanged)="flagChangedHandler($event)" [flag]="flag" *ngIf="flag" [customRepos]="customRepos" [users]="users"></app-users>

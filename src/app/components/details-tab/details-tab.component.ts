@@ -5,6 +5,7 @@ import { GithubService } from '../../services/github.service';
 import { Details } from "../../models/details";
 import { Repos } from 'src/app/models/repos';
 import * as _ from 'lodash';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-details-tab',
@@ -17,13 +18,25 @@ export class DetailsTabComponent implements OnInit {
   @Input() customRepos:Repos[];
   @Output() flagChanged: EventEmitter<boolean> =   new EventEmitter();
   login:String;
-  @Output() githubDetails:Repos;
+  @Output() githubDetails:any;
   editGithubDetails;
   editFlag:boolean;
 
-  constructor(private _router:Router, private route: ActivatedRoute, private githubService:GithubService) { }
+
+  constructor(private _router:Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.githubDetails = new FormGroup({
+            firstName: new FormControl(),
+            lastName: new FormControl(),
+            numOfRepos: new FormControl(),
+            avatar_url: new FormControl(),
+            login: new FormControl(),
+            id: new FormControl(),
+            following: new FormControl(),
+            location: new FormControl(),
+
+    });
     this.login = this.route.firstChild.snapshot.params['login'];
     this.getDetails();
   }
@@ -34,10 +47,15 @@ export class DetailsTabComponent implements OnInit {
     this._router.navigate(['/edit'], { replaceUrl: true });
   }
 
-  navigateToEdit(login){
-    // this.flag = !this.flag;
-    // this.flagChanged.emit(this.flag);
-    this._router.navigate(['/edit/'+login])
+  //Gets the details to DetailsComponent without making call to repos for other information
+  getDetails() {
+    let details = _.filter(this.customRepos, ['login', this.login]);
+    this.githubDetails = details[0];
+  }
+
+  onSave(): void {
+    //console.log(value)
+    //this.githubDetails = this.githubDetails.value;
   }
 
   editData(){
@@ -45,15 +63,7 @@ export class DetailsTabComponent implements OnInit {
     this.editFlag = !this.editFlag;
   }
 
-  //Gets the details to DetailsComponent without making call to repos for other information
-  getDetails() {
-    _.filter(this.customRepos, (obj) => {
-      if(obj.login === this.login) {
-        console.log(obj);
-        return this.githubDetails = obj;
-      } else {
-        this.githubDetails = this.customRepos[0];
-      }
-    }); 
+  onCancel() {
+    this.editFlag = false;
   }
 }

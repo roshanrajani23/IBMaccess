@@ -5,7 +5,7 @@
 
 .table {
   margin:100; 
-  th td{
+  th td {
       padding: 20px;
       vertical-align: middle;
       border-top: 1px solid #dee2e6;
@@ -14,6 +14,16 @@
   }
 }
 
-.backButton {
+h1 {
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.button {
   padding-left: 10px;
+}
+
+.search-bar {
+  width: 50px;
 }

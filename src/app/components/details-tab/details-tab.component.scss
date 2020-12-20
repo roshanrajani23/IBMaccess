@@ -1,6 +1,6 @@
-.table{
+.table {
     margin:100; 
-    th td{
+    th td {
         padding: 20px;
         vertical-align: middle;
         border-top: 1px solid #dee2e6;
@@ -9,21 +9,25 @@
     }
 }
 
-.headerDetails{
+.headerDetails {
     padding-top: 25px;
-    .header{
-        font-size: 35px;
+    .header {
+        font-size: 32px;
+        font-weight: bolder;
+    }
+    .button {
+        padding: 10px;
     }
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 .buttonGrid {
     float: right;
-    .button{
+    .button {
         padding-top: 5px;
     }
-    .buttonAround{
+    .buttonAround {
         padding-right: 5px;
     }
 }

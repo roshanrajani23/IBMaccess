@@ -7,10 +7,10 @@ import { UsersComponent } from './components/users/users.component';
 
 const routes: Routes = [
   { 
-    path: '', component: AppComponent,
-    children: [
-      {path: 'details/:login', component: DetailsTabComponent}
-    ]
+    path: '', component: AppComponent
+  },
+  {
+    path: 'details/:login', component: DetailsTabComponent
   }
 ]
 
