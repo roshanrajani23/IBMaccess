@@ -1,7 +1,14 @@
-<span class="searchBar">
-    <input  type="text" class="form-control" name='searchBar' (blur)='fireUserSearch($event)'  placeholder="Search ..">
-    </span>
-<table mat-table class="table table-bordered" style="margin:100;">
+<h1>Github Users Dashboard</h1>
+<form class="form-inline d-flex justify-content-center md-form form-sm active-cyan-2 mt-2">
+    <input class="form-control form-control-sm mr-3 w-75" 
+    (blur)='fireUserSearch($event)' 
+    name="searchBar" 
+    type="text" 
+    placeholder="Search"
+    aria-label="Search">
+    <i class="fas fa-search" aria-hidden="true"></i>
+</form>
+<table mat-table class="table table-hover">
     <thead class="thead-dark">
         <tr>
             <th>Avatar</th>
@@ -12,7 +19,8 @@
         </tr>
     </thead>
     <tbody>
-        <tr class="clickable" *ngFor="let repo of customRepos | paginate:{itemsPerPage:10, currentPage:p};" (click)="navigateDetails(repo.login)">
+        <tr class="clickable" *ngFor="let repo of customRepos | paginate:{itemsPerPage:10, currentPage:p};" 
+        (click)="navigateDetails(repo.login)">
             <td><img height="50" width="50" class="rounded" src={{repo.avatar_url}} alt="" /></td>
             <td>{{repo.login}}</td>
             <td>{{repo.firstName}}</td>

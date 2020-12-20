@@ -7,6 +7,7 @@ import { UsersComponent } from './components/users/users.component';
 
 const routes: Routes = [
   { path: 'details/:login', pathMatch: 'full', component: DetailsTabComponent },
+  { path: 'edit/:login', pathMatch: 'full', component: UsersComponent },
   { path: 'home', component: AppComponent  }
 ];
 

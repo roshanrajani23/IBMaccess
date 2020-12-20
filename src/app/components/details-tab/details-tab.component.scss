@@ -1,0 +1,23 @@
+.table{
+    margin:100; 
+    td{
+        padding: 20px;
+        vertical-align: middle;
+        border-top: 1px solid #dee2e6;
+        margin-left: 25px;
+        padding-left: 30px;
+    }
+}
+
+.headerDetails{
+    padding-top: 25px;
+    .header{
+        font-size: 35px;
+    }
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.backButton{
+    padding-top: 5px;
+}

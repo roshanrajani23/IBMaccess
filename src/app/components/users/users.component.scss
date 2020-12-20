@@ -1,4 +1,15 @@
 .paginate-center{
     display: flex;
-  justify-content: center;
+    justify-content: center;
+}
+
+.table{
+  margin:100; 
+  td{
+      padding: 20px;
+      vertical-align: middle;
+      border-top: 1px solid #dee2e6;
+      margin-left: 25px;
+      padding-left: 30px;
+  }
 }

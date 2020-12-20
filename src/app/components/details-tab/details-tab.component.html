@@ -1,25 +1,29 @@
-<button (click)="navigateBack()">Back</button>
-<table class="table table-bordered" style="margin:100;">
+<div class="headerDetails">
+    <span class="header">Github '{{githubDetails.firstName}} {{githubDetails.lastName}}' Details</span>
+    <span class="backButton">
+        <a (click)="navigateBack()" class="btn btn-primary">Back</a>
+    </span>
+</div>
+<table class="table">
+
     <thead class="thead-dark">
         <tr>
-
             <th>Avatar</th>
             <th>Username</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th># of Repos</th>
             <th>Edit Details</th>
-
         </tr>
     </thead>
     <tbody>
-        <tr>
+        <tr class="table-light">
             <td><img height="50" width="50" [src]="githubDetails.avatar_url" alt="" /></td>
             <td>{{githubDetails.login}}</td>
             <td>{{githubDetails.firstName}}</td>
             <td>{{githubDetails.lastName}}</td>
             <td>{{githubDetails.numOfRepos}}</td>
-            <td><button (click)="navigateBack()">Edit</button></td>
+            <td><a routerLink="edit/:login" (click)="navigateToEdit(login)" class="btn btn-primary">Edit</a></td>
         </tr>
         
     </tbody>

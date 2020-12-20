@@ -9,7 +9,7 @@ import * as _ from 'lodash';
 @Component({
   selector: 'app-details-tab',
   templateUrl: './details-tab.component.html',
-  styleUrls: ['./details-tab.component.css']
+  styleUrls: ['./details-tab.component.scss']
 })
 export class DetailsTabComponent implements OnInit {
 
@@ -27,9 +27,15 @@ export class DetailsTabComponent implements OnInit {
   }
 
   navigateBack(){
-  this.flag = !this.flag;
+    this.flag = !this.flag;
     this.flagChanged.emit(this.flag);
-    this._router.navigate(['/home'], { replaceUrl: true });
+    this._router.navigate(['/edit'], { replaceUrl: true });
+  }
+
+  navigateToEdit(login){
+    // this.flag = !this.flag;
+    // this.flagChanged.emit(this.flag);
+    this._router.navigate(['/edit/'+login])
   }
 
   getDetails() {
