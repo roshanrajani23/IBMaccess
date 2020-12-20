@@ -29,6 +29,7 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.getUsers();
+    
   }
 
   flagChangedHandler(flag: boolean) {
@@ -36,8 +37,7 @@ export class AppComponent {
   }
 
   getUsers(){
-    this.githubService.getUsers('r').subscribe((data)=>{
-      
+    this.githubService.getUsers().subscribe((data)=>{
       this.users = data
       this.getRepos();
     })
@@ -62,30 +62,5 @@ export class AppComponent {
           console.log(data.name)
       })
     })
-  }
-
-  fireUserSearch(e: any){
-    
-    let searchText:string = e.target.value;
-    if(searchText && searchText.length>0){
-      if(this.isSearchCleared){
-        this.backup_rowData = JSON.parse(JSON.stringify(this.rowData));
-      }
-      
-      this.githubService.getUsers(searchText).subscribe(x => {
-       this.rowData = [x];
-       this.isSearchCleared = false;
-      },
-      err =>{
-        console.log(err);
-        this.rowData = [];
-      });
-    }else{
-      if(this.backup_rowData && this.backup_rowData.length > 0){
-        this.rowData = JSON.parse(JSON.stringify(this.backup_rowData));
-        this.backup_rowData = [];
-        this.isSearchCleared = true;
-      }
-    }
   }
 }

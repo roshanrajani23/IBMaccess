@@ -21,16 +21,13 @@ export class UsersComponent implements OnInit {
   bsModalRef: any = {};
   backup_customRepos = [];
   isSearchCleared = true;
+  toastMessage = false;
   
   isObservableResolved:boolean
 
-  constructor(private _activatedRoute: ActivatedRoute, private _router: Router, private githubService:GithubService) {
-      
-   }
+  constructor(private _activatedRoute: ActivatedRoute, private _router: Router, private githubService:GithubService) {}
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   navigateDetails(login){
     this._router.navigate(['/details/'+login])
@@ -44,14 +41,23 @@ export class UsersComponent implements OnInit {
       if(this.isSearchCleared){
         this.backup_customRepos = JSON.parse(JSON.stringify(this.customRepos));
       }
-      
       this.githubService.getName(searchText).subscribe(x => {
-       this.customRepos = [x];
-       this.isSearchCleared = false;
+      this.customRepos = [x];
+      this.isSearchCleared = false;
       },
       err =>{
+        this.toastMessage = true;
         console.log(err);
-        this.customRepos = [];
+        let noDataFound = 
+        {
+          firstName: "",
+          lastName: "",
+          numOfRepos: "",
+          avatar_url: '/assets/images/emoji.png',
+          login: "No Data Found",
+          id: ""
+        }
+        this.customRepos = [noDataFound];
       });
     }else{
       if(this.backup_customRepos && this.backup_customRepos.length > 0){

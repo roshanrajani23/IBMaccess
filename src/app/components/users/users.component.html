@@ -1,12 +1,21 @@
 <h1>Github Users Dashboard</h1>
+<div *ngIf="toastMessage" class="toast d-flex align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body">
+      Hello, world! This is a toast message.
+    </div>
+    <button type="button" class="btn-close ms-auto me-2" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
 <form class="form-inline d-flex justify-content-center md-form form-sm active-cyan-2 mt-2">
     <input class="form-control form-control-sm mr-3 w-75" 
     (blur)='fireUserSearch($event)' 
     name="searchBar" 
-    type="text" 
+    type="text"
     placeholder="Search"
     aria-label="Search">
-    <i class="fas fa-search" aria-hidden="true"></i>
+    <i class="fas fa-search"></i>
+    <span class="backButton">
+        <a (click)="fireUserSearch($event)" type="submit" class="btn btn-primary">Search</a>
+    </span>
 </form>
 <table mat-table class="table table-hover">
     <thead class="thead-dark">

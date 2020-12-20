@@ -1,6 +1,6 @@
 <div class="headerDetails">
     <span class="header">Github '{{githubDetails.firstName}} {{githubDetails.lastName}}' Details</span>
-    <span class="backButton">
+    <span class="button">
         <a (click)="navigateBack()" class="btn btn-primary">Back</a>
     </span>
 </div>
@@ -23,8 +23,38 @@
             <td>{{githubDetails.firstName}}</td>
             <td>{{githubDetails.lastName}}</td>
             <td>{{githubDetails.numOfRepos}}</td>
-            <td><a routerLink="edit/:login" (click)="navigateToEdit(login)" class="btn btn-primary">Edit</a></td>
+            <td><a routerLink="edit/:login" (click)="editData()" class="btn btn-primary">Edit</a></td>
         </tr>
-        
     </tbody>
 </table>
+
+<div class="formClass" *ngIf="editFlag">
+    <form>
+        <div class="form-outline">
+          <div class="col inputClass">
+            <label>Username</label>
+            <input [(ngModel)]="githubDetails.login" name="login" type="text" class="form-control" placeholder="Login">
+          </div>
+          <div class="col inputClass">
+            <label>First Name</label>
+            <input [(ngModel)]="githubDetails.firstName" name="firstName" type="text" class="form-control" placeholder="First Name">
+          </div>
+          <div class="col inputClass">
+            <label>Last Name</label>
+            <input [(ngModel)]="githubDetails.lastName" name="lastName" type="text" class="form-control" placeholder="Last Name">
+          </div>
+          <div class="col inputClass">
+            <label>Number Of Repositories</label>
+            <input [(ngModel)]="githubDetails.numOfRepos" name="numOfRepos" type="text" class="form-control" placeholder="Repos">
+          </div>
+        </div>
+        <div class="buttonGrid">
+            <span class="button buttonAround">
+                <a (click)="navigateBack()" class="btn btn-secondary">Cancel</a>
+            </span>
+            <span class="button">
+                <a (click)="navigateBack()" class="btn btn-primary">Save</a>
+            </span>
+        </div>
+    </form>
+</div>

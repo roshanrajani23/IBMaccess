@@ -18,6 +18,8 @@ export class DetailsTabComponent implements OnInit {
   @Output() flagChanged: EventEmitter<boolean> =   new EventEmitter();
   login:String;
   @Output() githubDetails:Repos;
+  editGithubDetails;
+  editFlag:boolean;
 
   constructor(private _router:Router, private route: ActivatedRoute, private githubService:GithubService) { }
 
@@ -36,6 +38,11 @@ export class DetailsTabComponent implements OnInit {
     // this.flag = !this.flag;
     // this.flagChanged.emit(this.flag);
     this._router.navigate(['/edit/'+login])
+  }
+
+  editData(){
+    this.editGithubDetails = this.githubDetails;
+    this.editFlag = !this.editFlag;
   }
 
   getDetails() {

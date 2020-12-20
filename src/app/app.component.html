@@ -15,5 +15,6 @@
   </span>
   <app-users (flagChanged)="flagChangedHandler($event)" [flag]="flag" *ngIf="flag" [customRepos]="customRepos" [users]="users"></app-users>
   <app-details-tab (flagChanged)="flagChangedHandler($event)" [flag]="flag" [customRepos]="customRepos" [users]="users" *ngIf="!flag"></app-details-tab>
+  <app-edit-tab></app-edit-tab>
 </body>
 </html>

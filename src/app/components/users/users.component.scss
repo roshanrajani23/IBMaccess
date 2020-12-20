@@ -1,9 +1,9 @@
-.paginate-center{
+.paginate-center {
     display: flex;
     justify-content: center;
 }
 
-.table{
+.table {
   margin:100; 
   td{
       padding: 20px;
@@ -12,4 +12,8 @@
       margin-left: 25px;
       padding-left: 30px;
   }
+}
+
+.backButton {
+  padding-left: 10px;
 }

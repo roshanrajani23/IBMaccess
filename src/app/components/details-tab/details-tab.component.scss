@@ -18,6 +18,20 @@
     justify-content: space-evenly;
 }
 
-.backButton{
-    padding-top: 5px;
+.buttonGrid {
+    float: right;
+    .button{
+        padding-top: 5px;
+    }
+    .buttonAround{
+        padding-right: 5px;
+    }
+}
+
+.formClass {
+    margin: 0 auto !important;
+    max-width: 500px;
+    .inputClass {
+        padding-bottom: 20px;
+    }
 }

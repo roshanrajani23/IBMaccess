@@ -7,18 +7,22 @@ import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import { UsersComponent } from './components/users/users.component';
 import { DetailsTabComponent } from './components/details-tab/details-tab.component';
+import { EditTabComponent } from './components/edit-tab/edit-tab.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsersComponent,
-    DetailsTabComponent
+    DetailsTabComponent,
+    EditTabComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

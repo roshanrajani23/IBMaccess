@@ -11,7 +11,7 @@ export class GithubService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers(searchText:String):Observable<any>{
+  getUsers():Observable<any>{
     const url = "https://api.github.com/users"
     return this.http.get<Users[]>(url)
   }
@@ -19,24 +19,6 @@ export class GithubService {
     const url = `https://api.github.com/users/${usr}`
     return this.http.get<any>(url)
   }
-
-  getData():Observable<any>{
-    let githubData = "https://api.github.com/users"
-    return this.http.get<any>(githubData) 
-    .pipe(
-      mergeMap((result: any) => {
-        let allIds = result.map((x: any) => this.getName(x.login));
-        return forkJoin(...allIds).pipe(
-          map((idDataArray) => {
-            console.log(idDataArray);
-            return idDataArray;
-          })
-        )
-        
-      })
-    );
-  }
-    
   getName(loginId: string):Observable<any>{
     let githubData = "https://api.github.com/users/"+loginId;
     return this.http.get<any>(githubData)
