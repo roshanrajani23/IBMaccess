@@ -28,4 +28,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Other dependencies and framework used
 
-`Bootstrap v.51 -- `npm install bootstrap@next`
+`Bootstrap v.51` -- `npm install bootstrap@next`
