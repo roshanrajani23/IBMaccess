@@ -10,16 +10,15 @@ export class GithubService {
 
   constructor(private http: HttpClient) { }
 
+  //Gets 30 records of username/login from Github API
   getUsers():Observable<any>{
     const url = "https://api.github.com/users"
     return this.http.get<Users[]>(url)
   }
+
+  //Gets the Name and other details from Github API based of Username
   getRepos(usr:String):Observable<any>{
     const url = `https://api.github.com/users/${usr}`
     return this.http.get<any>(url)
-  }
-  getName(loginId: string):Observable<any>{
-    let githubData = "https://api.github.com/users/"+loginId;
-    return this.http.get<any>(githubData)
   }
 }

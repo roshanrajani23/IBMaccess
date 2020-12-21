@@ -3,7 +3,7 @@
     <form class="form-inline d-flex justify-content-center md-form form-sm active-cyan-2 mt-2">
             <input class="form-control form-control-sm mr-3 w-50" 
             [(ngModel)]="searchText"
-            #input 
+            (ngModelChange)="resetOnClearSearch($event)"
             name="searchBar" 
             type="text"
             tabindex="focus"
@@ -36,7 +36,7 @@
         <tbody>
             <tr class="clickable" *ngFor="let repo of customRepos | paginate:{itemsPerPage:10, currentPage:p};" 
             (click)="navigateDetails(repo.login)">
-                <td><img height="50" width="50" class="rounded" src={{repo.avatar_url}} alt="" /></td>
+                <td><img src={{repo.avatar_url}} alt="" /></td>
                 <td>{{repo.login}}</td>
                 <td>{{repo.firstName}}</td>
                 <td>{{repo.lastName}}</td>

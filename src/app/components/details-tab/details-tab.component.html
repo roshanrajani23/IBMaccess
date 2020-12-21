@@ -1,8 +1,8 @@
 <div class="headerDetails">
-    <span class="header">Github '{{githubDetails.firstName}} {{githubDetails.lastName}}' Details</span>
-    <span class="button">
-        <a (click)="navigateBack()" class="btn btn-primary">Back</a>
-    </span>
+  <span class="button">
+    <a (click)="navigateBack()" class="btn btn-primary">Back</a>
+  </span>
+  <span class="header">'{{githubDetails.firstName}} {{githubDetails.lastName}}' Details</span>  
 </div>
 <table class="table">
     <thead class="thead-dark">
@@ -19,7 +19,7 @@
     </thead>
     <tbody>
         <tr class="table-light">
-            <td><img height="50" width="50" [src]="githubDetails.avatar_url" alt="" /></td>
+            <td><img class="image2" [src]="githubDetails.avatar_url" alt="" /></td>
             <td>{{githubDetails.login}}</td>
             <td>{{githubDetails.firstName}}</td>
             <td>{{githubDetails.lastName}}</td>
@@ -32,41 +32,43 @@
 </table>
 
 <div class="formClass" *ngIf="editFlag">
-    <form #updateForm="githubDetails" [formGroup]="githubDetails" (ngSubmit)="onSave()">
+    <form #myForm="ngForm" (ngSubmit)="onSave(myForm.value)">
         <div class="form-outline">
           <div class="col inputClass">
-            <label>Username</label>
-            <input id="login" formControlName="login" name="login" type="text" class="form-control" placeholder="Login">
+            <img class="image" name="avatar_url" [ngModel]="githubDetails.avatar_url" [src]="githubDetails.avatar_url" alt="" />
           </div>
-          <!-- <div class="col inputClass">
+          <div class="col inputClass">
+            <label>Username</label>
+            <input id="login" [ngModel]="githubDetails.login" name="login" value="login" type="text" class="form-control" placeholder="Login" required>
+          </div>
+          <div class="col inputClass">
             <label>First Name</label>
-            <input [ngModel]="githubDetails.firstName" formControlName="firstName" name="firstName" type="text" class="form-control" placeholder="First Name">
+            <input id="firstName" [ngModel]="githubDetails.firstName" value="firstName" name="firstName" type="text" class="form-control" placeholder="First Name">
           </div>
           <div class="col inputClass">
             <label>Last Name</label>
-            <input [ngModel]="githubDetails.lastName" name="lastName" type="text" class="form-control" placeholder="Last Name">
+            <input [ngModel]="githubDetails.lastName" name="lastName" value="lastName" type="text" class="form-control" placeholder="Last Name">
           </div>
           <div class="col inputClass">
             <label>Number Of Repositories</label>
-            <input [ngModel]="githubDetails.numOfRepos" name="numOfRepos" type="text" class="form-control" placeholder="Repos">
+            <input [ngModel]="githubDetails.numOfRepos" name="numOfRepos" value="numOfRepos" type="number" class="form-control" placeholder="Repos">
           </div>
           <div class="col inputClass">
             <label>Following</label>
-            <input [ngModel]="githubDetails.following" name="following" type="text" class="form-control" placeholder="Repos">
+            <input [ngModel]="githubDetails.following" name="following" value="following" type="number" class="form-control" placeholder="Repos">
           </div>
           <div class="col inputClass">
             <label>Location</label>
-            <input [ngModel]="githubDetails.location" name="location" type="text" class="form-control" placeholder="Repos">
-          </div> -->
+            <input [ngModel]="githubDetails.location" name="location" value="location" type="text" class="form-control" placeholder="Repos">
+          </div>
         </div>
         <div class="buttonGrid">
             <span class="button buttonAround">
-                <a (click)="onCancel()" class="btn btn-secondary">Cancel</a>
+               <button (click)="onCancel()" class="btn btn-secondary">Cancel</button>
             </span>
             <span class="button">
-                <a (click)="loginChange()" class="btn btn-primary">Save</a>
+                <button type="submit" [disabled]="!myForm.valid" class="btn btn-primary">Save</button>
             </span>
         </div>
-        {{updateForm.value | json}}
     </form>
 </div>

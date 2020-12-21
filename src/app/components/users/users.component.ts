@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Repos } from 'src/app/models/repos';
 import { Users } from 'src/app/models/users';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { GithubService } from 'src/app/services/github.service';
 import { ToastrService } from 'ngx-toastr';
 import * as _ from 'lodash';
@@ -17,20 +17,23 @@ export class UsersComponent implements OnInit {
   @Input() customRepos:Repos[];
   @Input() flag:boolean;
   @Output() flagChanged: EventEmitter<boolean> = new EventEmitter();
-  p:number = 1;
-  searchText : String;
 
+  p:number = 1;
+  searchText: String;
+  txtValue: String;
   githubUsers: String[] = [];
   bsModalRef: any = {};
   backup_customRepos = [];
   isSearchCleared = true;
   toastMessage = false;
-  
+  backupData:Object;
   isObservableResolved:boolean
 
-  constructor(private _activatedRoute: ActivatedRoute, private _router: Router, private githubService:GithubService, private toaster:ToastrService) {}
+  constructor(private _router: Router, private githubService:GithubService, private toaster:ToastrService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.backupData = this.customRepos;
+  }
 
   navigateDetails(login){
     this._router.navigate(['/details/'+login])
@@ -74,7 +77,7 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  // Search Text data based of username from All gitApi data, for USERNAME
+  // Search 'username' data based of from Github API
   fireUserSearch(e: any){
     let searchText:string = e.target.value;
     this.getDetailsForSearch(this.searchText);
@@ -82,7 +85,7 @@ export class UsersComponent implements OnInit {
       if(this.isSearchCleared){
         this.backup_customRepos = JSON.parse(JSON.stringify(this.customRepos));
       }
-      this.githubService.getName(searchText).subscribe(x => {
+      this.githubService.getRepos(searchText).subscribe(x => {
         this.customRepos = [x];
         this.isSearchCleared = false;
       },
@@ -96,9 +99,18 @@ export class UsersComponent implements OnInit {
       }
       if (this.backup_customRepos && this.backup_customRepos.length > 0){
         this.customRepos = JSON.parse(JSON.stringify(this.backup_customRepos));
-        this.backup_customRepos = [];
+        //this.backup_customRepos = [];
         this.isSearchCleared = true;
       }
+    }
+  }
+
+  //Reset Table data if search is empty
+  resetOnClearSearch(value){
+    this.txtValue = value;
+    if(this.txtValue === '')
+    {
+      this.customRepos = JSON.parse(JSON.stringify(this.backupData));
     }
   }
 }
