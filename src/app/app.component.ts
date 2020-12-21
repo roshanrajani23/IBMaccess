@@ -9,8 +9,9 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
-  title = 'task';
+  title = 'IBM Assessment';
 
   users:Users[] = [];
   repos:Repos[] = [];
@@ -56,12 +57,11 @@ export class AppComponent {
           let id = data.id;
           let following = data.following;
           let location = data.location;
-          console.log(firstName+ '-' + lastName+'  -'+numOfRepos+' -'+avatar_url+"id"+id, login);
-          console.log(data);
           this.customRepos.push(new Repos(firstName, lastName, numOfRepos, avatar_url, login, id, following, location));
         }
-        else
-          console.log(data.name)
+        else err => {
+          console.log(err);
+        }
       })
     })
   }

@@ -1,11 +1,11 @@
 export class Repos {
     firstName:String;
     lastName:String;
-    numOfRepos:String;
+    numOfRepos:Number;
     avatar_url:String;
-    id:String;
+    id:Number;
     login:String;
-    following:String;
+    following:Number;
     location:String;
 
     constructor(firstName, lastName, numOfRepos, avatar_url, login, id, following, location){

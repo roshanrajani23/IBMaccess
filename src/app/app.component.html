@@ -1,15 +1,2 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Users Dashboard</title>
-  <base href="/">
-</head>
-<body>
-  <span>
-  </span>
-  <app-users (flagChanged)="flagChangedHandler($event)" [flag]="flag" *ngIf="flag" [customRepos]="customRepos" [users]="users"></app-users>
-  <app-details-tab (flagChanged)="flagChangedHandler($event)" [flag]="flag" [customRepos]="customRepos" [users]="users" *ngIf="!flag"></app-details-tab>
-</body>
-</html>
+<app-users (flagChanged)="flagChangedHandler($event)" [flag]="flag" *ngIf="flag" [customRepos]="customRepos" [users]="users"></app-users>
+<app-details-tab (flagChanged)="flagChangedHandler($event)" [flag]="flag" [customRepos]="customRepos" [users]="users" *ngIf="!flag"></app-details-tab>

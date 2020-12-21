@@ -7,4 +7,3 @@ export class Users {
        this.avatar_url = avatar_url;
    }
 }
-

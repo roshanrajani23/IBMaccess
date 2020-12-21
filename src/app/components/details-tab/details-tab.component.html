@@ -35,7 +35,7 @@
     <form #myForm="ngForm" (ngSubmit)="onSave(myForm.value)">
         <div class="form-outline">
           <div class="col inputClass">
-            <img class="image" name="avatar_url" [ngModel]="githubDetails.avatar_url" [src]="githubDetails.avatar_url" alt="" />
+            <img class="image" name="avatar_url" value="avatar_url" [ngModel]="githubDetails.avatar_url" [src]="githubDetails.avatar_url" alt="" />
           </div>
           <div class="col inputClass">
             <label>Username</label>

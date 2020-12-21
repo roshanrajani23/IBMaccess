@@ -46,7 +46,7 @@ export class UsersComponent implements OnInit {
   getDetailsForSearch(searchText: String){
     if(!_.isNil(searchText)) {
       this.githubService.getRepos(searchText).subscribe((data)=>{
-        if(data.name != null){
+        if(!_.isNil(data)){
           console.log(data);
           let name = data.name.split(' ');
             let firstName = name[0];
@@ -71,10 +71,11 @@ export class UsersComponent implements OnInit {
             this.customRepos.push(new Repos(firstName, lastName, numOfRepos, avatar_url, login, id, following, location));
             //Add to customRepos to show it on table
             this.customRepos = [searchValue];
-          } else err => {
-          console.log(err);
-        }
-      })
+          } 
+      }, err => {
+        this.toastr.info('No Username Found');
+        console.log(err);
+    }) 
     }
   }
 
