@@ -29,20 +29,21 @@ export class UsersComponent implements OnInit {
   backupData:Object;
   isObservableResolved:boolean
 
-  constructor(private _router: Router, private githubService:GithubService, private toaster:ToastrService) {}
+  constructor(private _router: Router, private githubService:GithubService, private toastr:ToastrService) {}
 
   ngOnInit(): void {
     this.backupData = this.customRepos;
   }
 
-  navigateDetails(login){
+  //Navigate to Details route
+  navigateDetails(login: String){
     this._router.navigate(['/details/'+login])
     this.flag = !this.flag
     this.flagChanged.emit(this.flag);
   }
 
   // Search Text data based of username from All gitApi data, for REPOS
-  getDetailsForSearch(searchText){
+  getDetailsForSearch(searchText: String){
     if(!_.isNil(searchText)) {
       this.githubService.getRepos(searchText).subscribe((data)=>{
         if(data.name != null){
@@ -90,23 +91,23 @@ export class UsersComponent implements OnInit {
         this.isSearchCleared = false;
       },
       err => {
-        this.toaster.info('No Username Found');
+        this.toastr.info('No Username Found');
         console.log(err);
       });
     } else {
       if(_.isNil(this.searchText)) {
-        this.toaster.info('Please enter a Username');
+        this.toastr.info('Please enter a Username');
       }
       if (this.backup_customRepos && this.backup_customRepos.length > 0){
         this.customRepos = JSON.parse(JSON.stringify(this.backup_customRepos));
-        //this.backup_customRepos = [];
+        this.backup_customRepos = [];
         this.isSearchCleared = true;
       }
     }
   }
 
   //Reset Table data if search is empty
-  resetOnClearSearch(value){
+  resetOnClearSearch(value: any){
     this.txtValue = value;
     if(this.txtValue === '')
     {

@@ -1,10 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from "@angular/router";
 import { Repos } from 'src/app/models/repos';
 import * as _ from 'lodash';
-
-import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-details-tab',
@@ -16,8 +14,7 @@ export class DetailsTabComponent implements OnInit {
   @Input() flag:boolean;
   @Input() customRepos:Repos[];
   @Output() flagChanged: EventEmitter<boolean> =   new EventEmitter();
-  @Output() githubDetails:any;
-  @ViewChild('myForm', { static: true }) myForm: NgForm;
+  @Output() githubDetails:Repos;
   login:String;
   editGithubDetails:Object;
   editFlag:boolean;
